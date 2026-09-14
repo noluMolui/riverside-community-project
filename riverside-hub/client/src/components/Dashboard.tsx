@@ -7,24 +7,26 @@ const upcomingEvents = [
 ]
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
 
   return (
-    <div className="dashboard">
-      <p>Logged in as {user?.email}</p>
+    <div className="space-y-6">
+      <p className="text-orange-300">Logged in as {user?.email}</p>
 
-      <h2>Upcoming Events</h2>
-      <ul>
-        {upcomingEvents.map((event) => (
-          <li key={event.id}>
-            {event.title} — {event.date}
-          </li>
-        ))}
-      </ul>
-
-      <button type="button" onClick={signOut}>
-        Log Out
-      </button>
+      <div className="rounded-lg border border-orange-500/40 bg-neutral-900 p-6">
+        <h2 className="mb-4 text-lg font-semibold text-orange-400">Upcoming Events</h2>
+        <ul className="space-y-2">
+          {upcomingEvents.map((event) => (
+            <li
+              key={event.id}
+              className="flex justify-between border-b border-neutral-800 pb-2 text-sm"
+            >
+              <span>{event.title}</span>
+              <span className="text-orange-300">{event.date}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
