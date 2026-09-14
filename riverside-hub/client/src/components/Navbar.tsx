@@ -10,7 +10,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={signOut}
-          className="rounded bg-orange-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-orange-400"
+          className="cursor-pointer rounded bg-orange-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-orange-400"
         >
           Log Out
         </button>

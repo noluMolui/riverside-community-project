@@ -88,7 +88,7 @@ export default function AuthForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded bg-orange-500 py-2 font-semibold text-black transition hover:bg-orange-400 disabled:opacity-50"
+          className="w-full cursor-pointer rounded bg-orange-500 py-2 font-semibold text-black transition hover:bg-orange-400 disabled:opacity-50"
         >
           {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Log In'}
         </button>
@@ -109,7 +109,7 @@ export default function AuthForm() {
         type="button"
         onClick={() => setIsSignUp(!isSignUp)}
         disabled={loading}
-        className="mt-4 w-full text-center text-sm text-orange-300 hover:underline disabled:opacity-50"
+        className="mt-4 w-full cursor-pointer text-center text-sm text-orange-300 hover:underline disabled:opacity-50"
       >
         {isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
       </button>
