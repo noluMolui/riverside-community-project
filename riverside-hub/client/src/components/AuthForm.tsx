@@ -13,16 +13,30 @@ export default function AuthForm() {
     e.preventDefault()
     setError('')
     setMessage('')
+
+    const trimmedEmail = email.trim()
+
+    if (!trimmedEmail.includes('@')) {
+      setError('Please enter a valid email address')
+      return
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters')
+      return
+    }
+
     setLoading(true)
 
     const { error } = isSignUp
-      ? await supabase.auth.signUp({ email, password })
-      : await supabase.auth.signInWithPassword({ email, password })
+      ? await supabase.auth.signUp({ email: trimmedEmail, password })
+      : await supabase.auth.signInWithPassword({ email: trimmedEmail, password })
 
     if (error) {
       setError(error.message)
     } else if (isSignUp) {
       setMessage('Check your email to confirm your account')
+      setPassword('')
     }
 
     setLoading(false)
@@ -59,13 +73,22 @@ export default function AuthForm() {
         </button>
       </form>
 
-      {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
-      {message && <p className="mt-4 text-sm text-green-400">{message}</p>}
+      {error && (
+        <p className="mt-4 text-sm text-red-400" aria-live="polite">
+          {error}
+        </p>
+      )}
+      {message && (
+        <p className="mt-4 text-sm text-green-400" aria-live="polite">
+          {message}
+        </p>
+      )}
 
       <button
         type="button"
         onClick={() => setIsSignUp(!isSignUp)}
-        className="mt-4 w-full text-center text-sm text-orange-300 hover:underline"
+        disabled={loading}
+        className="mt-4 w-full text-center text-sm text-orange-300 hover:underline disabled:opacity-50"
       >
         {isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
       </button>
