@@ -1,9 +1,10 @@
 import { useAuth } from './context/AuthContext'
 import AuthForm from './components/AuthForm'
+import Dashboard from './components/Dashboard'
 import './App.css'
 
 function App() {
-  const { user, loading, signOut } = useAuth()
+  const { user, loading } = useAuth()
 
   if (loading) {
     return <p>Loading...</p>
@@ -13,16 +14,7 @@ function App() {
     <section id="center">
       <h1>Riverside Community Hub</h1>
 
-      {user ? (
-        <div>
-          <p>Logged in as {user.email}</p>
-          <button type="button" onClick={signOut}>
-            Log Out
-          </button>
-        </div>
-      ) : (
-        <AuthForm />
-      )}
+      {user ? <Dashboard /> : <AuthForm />}
     </section>
   )
 }
